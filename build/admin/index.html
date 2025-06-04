@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم موقع السياحة</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    /* تخصيص واجهة لوحة التحكم لدعم اللغة العربية */
+    :root {
+      --primary: #1976d2;
+      --secondary: #ff9800;
+    }
+    
+    html {
+      direction: rtl;
+    }
+    
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+    }
+    
+    /* تخصيص أنماط لوحة التحكم */
+    .css-1f7nhiq-CollectionTopContainer-card-cardTop {
+      direction: rtl;
+    }
+    
+    .css-1hvrgvd-CollectionTopContainer-card-cardTop {
+      direction: rtl;
+    }
+    
+    .css-v758ki-AppMainContainer, .css-12b66la-AppHeaderContent {
+      direction: rtl;
+    }
+    
+    .css-104dqk8-EditorControlBar {
+      direction: rtl;
+    }
+    
+    .css-2oej7z-ToolbarContainer {
+      direction: rtl;
+    }
+    
+    .css-1muvhrm {
+      direction: rtl;
+    }
+    
+    .css-1f3mf5k-StyledModal {
+      direction: rtl;
+    }
+    
+    /* تخصيص الخطوط */
+    @font-face {
+      font-family: 'Cairo';
+      src: url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    }
+    
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+    }
+  </style>
+</head>
+<body>
+  <!-- تضمين لوحة تحكم Netlify CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // تكوين لوحة التحكم لدعم اللغة العربية
+    CMS.registerLocale('ar', {
+      locale: 'ar',
+      direction: 'rtl',
+      messages: {
+        app: {
+          header: {
+            content: 'المحتوى',
+            workflow: 'سير العمل',
+            media: 'الوسائط',
+            quickAdd: 'إضافة سريعة',
+          },
+          app: {
+            errorHeader: 'حدث خطأ أثناء تحميل تكوين لوحة التحكم',
+            configErrors: 'أخطاء في التكوين',
+            checkConfigYml: 'تحقق من ملف config.yml الخاص بك.',
+            loadingConfig: 'جاري تحميل التكوين...',
+            waitingBackend: 'في انتظار الخادم...',
+          },
+          collection: {
+            sidebar: {
+              collections: 'المجموعات',
+              searchAll: 'بحث في الكل',
+            },
+            collectionTop: {
+              viewAs: 'عرض كـ',
+              newButton: 'جديد %{collectionLabel}',
+            },
+            entries: {
+              loadingEntries: 'جاري تحميل المدخلات...',
+              cachingEntries: 'جاري تخزين المدخلات...',
+              longerLoading: 'قد يستغرق هذا عدة دقائق',
+              noEntries: 'لا توجد مدخلات',
+            },
+          },
+          editor: {
+            editorControl: {
+              field: {
+                optional: 'اختياري',
+              },
+            },
+            editorControlPane: {
+              widget: {
+                required: '%{fieldLabel} مطلوب.',
+                regexPattern: '%{fieldLabel} لا يتطابق مع النمط: %{pattern}.',
+                processing: 'جاري المعالجة %{fieldLabel}.',
+                range: '%{fieldLabel} يجب أن يكون بين %{minValue} و %{maxValue}.',
+                min: '%{fieldLabel} يجب أن يكون على الأقل %{minValue}.',
+                max: '%{fieldLabel} يجب أن يكون %{maxValue} أو أقل.',
+                rangeCount: '%{fieldLabel} يجب أن يكون بين %{minCount} و %{maxCount} عنصر.',
+                rangeCountExact: '%{fieldLabel} يجب أن يكون بالضبط %{count} عنصر.',
+                minCount: '%{fieldLabel} يجب أن يكون على الأقل %{minCount} عنصر.',
+                maxCount: '%{fieldLabel} يجب أن يكون %{maxCount} عنصر أو أقل.',
+                invalidPath: "'%{path}' ليس مسارًا صالحًا",
+                pathExists: "المسار '%{path}' موجود بالفعل",
+              },
+            },
+            editor: {
+              onLeavePage: 'هل أنت متأكد أنك تريد مغادرة هذه الصفحة؟',
+              onUpdatingWithUnsavedChanges: 'لديك تغييرات غير محفوظة، يرجى الحفظ قبل التحديث.',
+              onPublishingNotReady: 'يرجى تحديث الحالة إلى "جاهز" قبل النشر.',
+              onPublishingWithUnsavedChanges: 'لديك تغييرات غير محفوظة، يرجى الحفظ قبل النشر.',
+              onPublishing: 'هل أنت متأكد أنك تريد نشر هذا المدخل؟',
+              onUnpublishing: 'هل أنت متأكد أنك تريد إلغاء نشر هذا المدخل؟',
+              onDeleteWithUnsavedChanges: 'هل أنت متأكد أنك تريد حذف هذا المدخل المنشور، بالإضافة إلى التغييرات غير المحفوظة من الجلسة الحالية؟',
+              onDeletePublishedEntry: 'هل أنت متأكد أنك تريد حذف هذا المدخل المنشور؟',
+              onDeleteUnpublishedChangesWithUnsavedChanges: 'سيؤدي هذا إلى حذف جميع التغييرات غير المنشورة لهذا المدخل، بالإضافة إلى التغييرات غير المحفوظة من الجلسة الحالية. هل ما زلت تريد الحذف؟',
+              onDeleteUnpublishedChanges: 'سيتم حذف جميع التغييرات غير المنشورة لهذا المدخل. هل ما زلت تريد الحذف؟',
+              loadingEntry: 'جاري تحميل المدخل...',
+              confirmLoadBackup: 'تم استرداد نسخة احتياطية محلية لهذا المدخل، هل ترغب في استخدامها؟',
+            },
+          },
+          mediaLibrary: {
+            mediaLibraryCard: {
+              draft: 'مسودة',
+            },
+            mediaLibrary: {
+              onDelete: 'هل أنت متأكد أنك تريد حذف الوسائط المحددة؟',
+              fileTooLarge: 'الملف كبير جدًا.\nتم تكوين المكتبة لعدم قبول الملفات التي تزيد عن %{size} كيلوبايت.',
+            },
+            mediaLibraryModal: {
+              loading: 'جاري التحميل...',
+              noResults: 'لا توجد نتائج.',
+              noAssetsFound: 'لم يتم العثور على أصول.',
+              noImagesFound: 'لم يتم العثور على صور.',
+              private: 'خاص ',
+              images: 'صور',
+              mediaAssets: 'أصول الوسائط',
+              search: 'بحث...',
+              uploading: 'جاري الرفع...',
+              upload: 'رفع جديد',
+              download: 'تنزيل',
+              deleting: 'جاري الحذف...',
+              deleteSelected: 'حذف المحدد',
+              chooseSelected: 'اختيار المحدد',
+            },
+          },
+          ui: {
+            default: {
+              goBackToSite: 'العودة إلى الموقع',
+            },
+            errorBoundary: {
+              title: 'خطأ',
+              details: 'حدث خطأ - يرجى ',
+              reportIt: 'الإبلاغ عنه.',
+              detailsHeading: 'تفاصيل',
+              privacyWarning: 'فتح مشكلة يملأها مسبقًا برسالة الخطأ والبيانات التشخيصية.\nيرجى التحقق من صحة المعلومات وإزالة البيانات الحساسة إذا كانت موجودة.',
+              recoveredEntry: {
+                heading: 'مستند مسترجع',
+                warning: 'يرجى نسخ/لصق هذا في مكان ما قبل المغادرة!',
+                copyButtonLabel: 'نسخ إلى الحافظة',
+              },
+            },
+            settingsDropdown: {
+              logOut: 'تسجيل الخروج',
+            },
+            toast: {
+              onFailToLoadEntries: 'فشل في تحميل المدخل: %{details}',
+              onFailToLoadDeployPreview: 'فشل في تحميل المعاينة: %{details}',
+              onFailToPersist: 'فشل في حفظ المدخل: %{details}',
+              onFailToDelete: 'فشل في حذف المدخل: %{details}',
+              onFailToUpdateStatus: 'فشل في تحديث الحالة: %{details}',
+              missingRequiredField: 'عفوًا، أنت تفتقد حقلًا مطلوبًا. يرجى الإكمال قبل الحفظ.',
+              entrySaved: 'تم حفظ المدخل',
+              entryPublished: 'تم نشر المدخل',
+              entryUnpublished: 'تم إلغاء نشر المدخل',
+              onFailToPublishEntry: 'فشل في نشر المدخل: %{details}',
+              onFailToUnpublishEntry: 'فشل في إلغاء نشر المدخل: %{details}',
+              entryUpdated: 'تم تحديث حالة المدخل',
+              onDeleteUnpublishedChanges: 'تم حذف التغييرات غير المنشورة',
+              onFailToAuth: '%{details}',
+              onLoggedOut: 'تم تسجيل خروجك، يرجى حفظ أي بيانات وتسجيل الدخول مرة أخرى',
+              onBackendDown: 'تواجه خدمة الخلفية انقطاعًا. للمزيد من المعلومات، راجع %{details}',
+            },
+          },
+          workflow: {
+            workflow: {
+              loading: 'جاري تحميل مدخلات سير العمل',
+              workflowHeading: 'سير العمل التحريري',
+              newPost: 'منشور جديد',
+              description: '%{smart_count} مدخل ينتظر المراجعة، %{readyCount} جاهز للنشر. |||| %{smart_count} مدخلات تنتظر المراجعة، %{readyCount} جاهز للنشر. ',
+              dateFormat: 'MMMM D',
+            },
+            workflowCard: {
+              lastChange: '%{date} بواسطة %{author}',
+              lastChangeNoAuthor: '%{date}',
+              lastChangeNoDate: 'بواسطة %{author}',
+              deleteChanges: 'حذف التغييرات',
+              deleteNewEntry: 'حذف المدخل الجديد',
+              publishChanges: 'نشر التغييرات',
+              publishNewEntry: 'نشر مدخل جديد',
+            },
+            workflowList: {
+              onDeleteEntry: 'هل أنت متأكد أنك تريد حذف هذا المدخل؟',
+              onPublishingNotReadyEntry: 'يمكن فقط نشر العناصر ذات حالة "جاهز". يرجى سحب البطاقة إلى عمود "جاهز" للتمكين من النشر.',
+              onPublishEntry: 'هل أنت متأكد أنك تريد نشر هذا المدخل؟',
+              draftHeader: 'مسودات',
+              inReviewHeader: 'قيد المراجعة',
+              readyHeader: 'جاهز',
+              currentEntries: '%{smart_count} مدخل |||| %{smart_count} مدخلات',
+            },
+          },
+        },
+      },
+    });
+    
+    // تعيين اللغة العربية كلغة افتراضية
+    CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap');
+    CMS.registerPreviewStyle('/admin/preview.css');
+  </script>
+  
+  <script>
+    // تكوين Netlify Identity
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
